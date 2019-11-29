@@ -537,6 +537,53 @@ class processor based on the Armv8-M mainline architecture with Arm TrustZone se
       </device>
     </family>
 
+<!-- ******************************  STAR Processor ****************************** -->
+    <family Dfamily="Arm China STAR Series" Dvendor="ARM:82">
+      <!--book name="Device/ARM/Documents/??_dgug.pdf"       title="?? Device Generic Users Guide"/-->
+      <description>
+      The Arm China STAR processor is the first processor in the STAR series processor family. 
+      It is a fully featured microcontroller class processor based on the Armv8-M mainline architecture with Arm TrustZone technology.
+      </description>
+      <!-- debug svd="Device/ARM/SVD/ARMCM33.svd"/ SVD files do not contain any peripheral -->
+      <memory id="IROM1"                                start="0x00000000" size="0x00200000" startup="1" default="1"/>
+      <memory id="IROM2"                                start="0x00200000" size="0x00200000" startup="0" default="0"/>
+      <memory id="IRAM1"                                start="0x20000000" size="0x00020000" init   ="0" default="1"/>
+      <memory id="IRAM2"                                start="0x20200000" size="0x00020000" init   ="0" default="0"/>
+      <!--algorithm name="Device/ARM/Flash/NEW_DEVICE.FLM" start="0x00000000" size="0x00040000"          default="1"/-->
+
+      <device Dname="STAR">
+        <processor Dcore="Cortex-M33" DcoreVersion="r0p0" Dfpu="NO_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dtz="NO_TZ" Dendian="Configurable" Dclock="10000000"/>
+        <description>
+          no DSP Instructions, no Floating Point Unit, no TrustZone
+        </description>
+        <compile header="Device/ARM/ARMCM33/Include/ARMCM33.h" define="ARMCM33"/>
+      </device>
+
+      <device Dname="STAR_TZ">
+        <processor Dcore="Cortex-M33" DcoreVersion="r0p0" Dfpu="NO_FPU" Dmpu="MPU" Ddsp="NO_DSP" Dtz="TZ" Dendian="Configurable" Dclock="10000000"/>
+        <description>
+          no DSP Instructions, no Floating Point Unit, TrustZone
+        </description>
+        <compile header="Device/ARM/ARMCM33/Include/ARMCM33_TZ.h" define="ARMCM33_TZ"/>
+      </device>
+
+      <device Dname="STAR_DSP_FP">
+        <processor Dcore="Cortex-M33" DcoreVersion="r0p0" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="DSP" Dtz="NO_TZ" Dendian="Configurable" Dclock="10000000"/>
+        <description>
+          DSP Instructions, Single Precision Floating Point Unit, no TrustZone
+        </description>
+        <compile header="Device/ARM/ARMCM33/Include/ARMCM33_DSP_FP.h" define="ARMCM33_DSP_FP"/>
+      </device>
+
+      <device Dname="STAR_DSP_FP_TZ">
+        <processor Dcore="Cortex-M33" DcoreVersion="r0p0" Dfpu="SP_FPU" Dmpu="MPU" Ddsp="DSP" Dtz="TZ" Dendian="Configurable" Dclock="10000000"/>
+        <description>
+          DSP Instructions, Single Precision Floating Point Unit, TrustZone
+        </description>
+        <compile header="Device/ARM/ARMCM33/Include/ARMCM33_DSP_FP_TZ.h" define="ARMCM33_DSP_FP_TZ"/>
+      </device>
+    </family>
+	  
     <!-- ******************************  Cortex-M35P  ****************************** -->
     <family Dfamily="ARM Cortex M35P" Dvendor="ARM:82">
       <!--book name="Device/ARM/Documents/??_dgug.pdf"       title="?? Device Generic Users Guide"/-->
