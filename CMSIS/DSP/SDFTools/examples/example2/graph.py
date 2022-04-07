@@ -1,8 +1,5 @@
-import sys
+from cmsisdsp.sdf.scheduler import *
 
-sys.path.append("../..")
-
-from sdf import *
 
 AUDIO_INTERRUPT_LENGTH = 160
 MFCCFEATURESSIZE=10
@@ -104,6 +101,7 @@ print("Schedule length = %d" % sched.scheduleLength)
 print("Memory usage %d bytes" % sched.memory)
 #
 
+#conf.codeArray=True
 sched.ccode("generated",conf)
 
 with open("test.dot","w") as f:

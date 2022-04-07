@@ -7,12 +7,10 @@
 
 import sys
 
-# To find SDF module
-sys.path.append("../..")
 
 import numpy as np
 import cmsisdsp as dsp
-from sdf.schedule.simu import *
+from cmsisdsp.sdf.nodes.simu import *
 from appnodes import * 
 from custom import *
 
@@ -51,7 +49,7 @@ buf7=np.zeros(FIFOSIZE7,dtype=np.float32)
 def scheduler(dispbuf):
     sdfError=0
     nbSchedule=0
-    debugCounter=42;
+    debugCounter=42
 
     #
     #  Create FIFOs objects
@@ -68,14 +66,14 @@ def scheduler(dispbuf):
     # 
     #  Create node objects
     #
-    audioOverlap = OverlapAdd(256,128,fifo6,fifo7);
-    audioWin = SlidingBuffer(256,128,fifo0,fifo1);
-    cfft = CFFT(512,512,fifo3,fifo4);
-    icfft = ICFFT(512,512,fifo4,fifo5);
-    sink = FileSink(192,fifo7,"output_example3.txt",dispbuf);
-    src = FileSource(192,fifo0,"input_example3.txt");
-    toCmplx = ToComplex(256,512,fifo2,fifo3);
-    toReal = ToReal(512,256,fifo5,fifo6);
+    audioOverlap = OverlapAdd(256,128,fifo6,fifo7)
+    audioWin = SlidingBuffer(256,128,fifo0,fifo1)
+    cfft = CFFT(512,512,fifo3,fifo4)
+    icfft = ICFFT(512,512,fifo4,fifo5)
+    sink = FileSink(192,fifo7,"output_example3.txt",dispbuf)
+    src = FileSource(192,fifo0,"input_example3.txt")
+    toCmplx = ToComplex(256,512,fifo2,fifo3)
+    toReal = ToReal(512,256,fifo5,fifo6)
 
     while((sdfError==0) and (debugCounter > 0)):
        nbSchedule = nbSchedule + 1

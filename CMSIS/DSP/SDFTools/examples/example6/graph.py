@@ -1,9 +1,7 @@
-import sys
 import numpy as np 
 
-sys.path.append("../..")
+from cmsisdsp.sdf.scheduler import *
 
-from sdf import *
 
 from sharedconfig import *
 
@@ -50,6 +48,7 @@ conf=Configuration()
 conf.debugLimit=1
 conf.cOptionalArgs="arm_mfcc_instance_f32 *mfccConfig"
 
+#conf.codeArray=True
 sched.ccode("generated",config=conf)
 
 with open("test.dot","w") as f:

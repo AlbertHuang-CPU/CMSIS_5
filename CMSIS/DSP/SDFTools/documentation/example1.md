@@ -54,6 +54,8 @@ When creating a new kind of node (here a sink) we always need to do 2 things:
 - Add inputs and outputs. The convention is that an input is named "i" and output "o". When there are several inputs they are named "ia", "ib" etc ...
 - For a sink you can only add an input. So the function addOutput is not available.
 - The constructor is taking a length and a type. It is used to create the io
+- When there are several inputs or outputs, they are ordered using alphabetical order.
+It is important to know what is the ID of the corresponding IO in the C code.
 
 The definition of a new kind of Source is very similar:
 
@@ -150,13 +152,14 @@ This configuration object can be used as argument of the scheduling function (na
 
 There are other fields for the configuration:
 
-- dumpFIFO : Will dump the output FIFOs content after each execution of the node (the code generator is inserting calls to the FIFO dump function)
-- displayFIFOSizes : During the computation of the schedule, the Python script is displaying the evolution of the FIFO lengths.
-- schedName : The name of the scheduler function (`scheduler` by default)
-- cOptionalArgs and pyOptionalArgs for passing additional arguments to the scheduling function
-- prefix to prefix the same of the global buffers
-- memoryOptimization : Experimental. It is attempting to reuse buffer memory and share it between several FIFOs 
-- pathToSDFModule : Path to the Python SDF module so that the generated Python code can find it
+- `dumpFIFO` : Will dump the output FIFOs content after each execution of the node (the code generator is inserting calls to the FIFO dump function)
+- `displayFIFOSizes` : During the computation of the schedule, the Python script is displaying the evolution of the FIFO lengths.
+- `schedName` : The name of the scheduler function (`scheduler` by default)
+- `cOptionalArgs` and pyOptionalArgs for passing additional arguments to the scheduling function
+- `prefix` to prefix the same of the global buffers
+- `memoryOptimization` : Experimental. It is attempting to reuse buffer memory and share it between several FIFOs 
+- `pathToSDFModule` : Path to the Python SDF module so that the generated Python code can find it
+- `codeArray` : Experimental. When a schedule is very long, representing it as a sequence of function calls is not good for the code size of the generated solution. When this option is enabled, the schedule is described with an array. It implies that the pure function calls cannot be inlined any more and are replaced by new nodes which are automatically generated.
 
 In the example 1, we are passing a variable to initialize the node of type ProcessingNode. So, it would be great if this variable was an argument of the scheduler function. So we define:
 

@@ -1,8 +1,4 @@
-import sys
-
-sys.path.append("../..")
-
-from sdf import *
+from cmsisdsp.sdf.scheduler import *
 
 ### Define new types of Nodes 
 
@@ -68,7 +64,7 @@ print("Schedule length = %d" % sched.scheduleLength)
 print("Memory usage %d bytes" % sched.memory)
 #
 
-
+#conf.codeArray=True
 sched.ccode("generated",conf)
 
 with open("test.dot","w") as f:

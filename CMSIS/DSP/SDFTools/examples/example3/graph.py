@@ -1,9 +1,6 @@
-import sys
 import numpy as np 
 
-sys.path.append("../..")
-
-from sdf import *
+from cmsisdsp.sdf.scheduler import *
 
 
 FS=16000
@@ -64,6 +61,7 @@ print("Memory usage %d bytes" % sched.memory)
 
 
 #conf.dumpFIFO=True
+#conf.codeArray=True
 sched.ccode("generated",config=conf)
 
 with open("test.dot","w") as f:
